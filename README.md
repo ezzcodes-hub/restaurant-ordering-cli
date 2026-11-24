@@ -1,6 +1,6 @@
 # 🍽️ Restaurant Ordering CLI
 
-A Python CLI restaurant ordering system with a structured menu, quantity tracking, total price calculation, and input validation. Built as a practice project.
+Simple Python CLI for restaurant orders and receipts.
 
 ---
 
