@@ -77,7 +77,7 @@ Total amount: $21
 
 ---
 
-## 🔮 Future Improvements
+## ⭐️ Future Improvements
 
 - 🗄️ Store menu items and orders in a SQLite or PostgreSQL database.
 - ✏️ Allow users to edit or remove items before checkout.
