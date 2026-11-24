@@ -1,6 +1,6 @@
 # 🍽️ Restaurant Ordering CLI
 
-A Python CLI restaurant ordering system with a structured menu, quantity tracking, total price calculation, and input validation. Built as a foundation for a future full-stack application.
+A Python CLI restaurant ordering system with a structured menu, quantity tracking, total price calculation, and input validation. Built as a practice project.
 
 ---
 
@@ -10,12 +10,13 @@ A Python CLI restaurant ordering system with a structured menu, quantity trackin
 - **Multi-Item Ordering:** Order multiple meals with custom quantities in a single session.
 - **Input Validation:** Handles invalid menu selections, non-numeric input, and invalid quantities using `try-except` blocks without crashing.
 - **Order Summary:** Generates an itemized receipt with quantities and the total price at checkout.
+- **Modular Design:** Organized into functions with a `main()` entry point.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python 3.x
+- Python 3.8+
 
 ---
 
@@ -38,6 +39,8 @@ python foodOrder.py
 
 ## 💡 Example Output
 
+Here the user orders 3 Beef Burgers (meal `2`, quantity `3`), then enters `0` to get the receipt:
+
 ```text
 Our Menu:
 
@@ -47,7 +50,7 @@ Our Menu:
 4. Fish Burger - Price: $5
 5. Pizza - Price: $4
 
-----------------------------------------
+-----------------------------------
 
 Enter the meal number to order (or 0 to print the total amount with details): 2
 Enter the number of meals: 3
@@ -62,7 +65,7 @@ Our Menu:
 4. Fish Burger - Price: $5
 5. Pizza - Price: $4
 
-----------------------------------------
+-----------------------------------
 
 Enter the meal number to order (or 0 to print the total amount with details): 0
 
@@ -72,15 +75,13 @@ Your meal/s:
 
 Total amount: $21
 
-----------------------------------------
+-----------------------------------
 ```
 
 ---
 
-## ⭐️ Future Improvements
+## ⭐ Possible Improvements
 
-- 🗄️ Store menu items and orders in a SQLite or PostgreSQL database.
+- 🗄️ Store menu items and orders in a SQLite database.
 - ✏️ Allow users to edit or remove items before checkout.
-- 🌐 Build a web interface using Flask or Django.
-- 🔌 Develop a REST API for menu and order management.
-- 👤 Add user authentication and order history.
+- 🧪 Add unit tests for the total price calculation.
