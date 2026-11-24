@@ -1,50 +1,77 @@
 import os
-menu = {
+
+MENU = {
     "1": {"name": "Chicken Shawarma", "price": 8},
     "2": {"name": "Beef Burger", "price": 7},
     "3": {"name": "Chicken Burger", "price": 6},
     "4": {"name": "Fish Burger", "price": 5},
     "5": {"name": "Pizza", "price": 4},
 }
+
+SEPARATOR = "-----------------------------------"
+INVALID_NUMBER_MSG = "Invalid input!\nThe number must be an integer greater than zero ^_^\n"
+
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def show_menu():
-    for item_id, details in menu.items():
-        print(f"{item_id}. {details['name']} - Price: ${details['price']}")
-    print('-----------------------------------')
-current_order = []
-current_nb_of_meals = []
-totalPrice = 0
-while True:
     print("Our Menu:\n")
-    show_menu()
-    choice = input("\nEnter the meal number to order (or 0 to print the total amount with details): ")
-    if choice == "0":
-        if len(current_order) > 0:
-            print("\nYour meal/s:\n")
-            index = 1
-            for item in current_order:
-                current_nb = current_nb_of_meals[index - 1]
-                print(f"{index}. {item['name']} x{current_nb} for ${item['price'] * current_nb}")
-                index = index + 1
-                totalPrice = totalPrice + item['price'] * current_nb
-        print(f"\nTotal amount: ${totalPrice}\n")
-        print('-----------------------------------\n')
-        break
-    elif choice in menu:
+    for item_id, details in MENU.items():
+        print(f"{item_id}. {details['name']} - Price: ${details['price']}")
+    print(SEPARATOR)
+
+
+def take_order(current_order, current_nb_of_meals):
+    """Loop until the user enters 0. Fills the two lists in place."""
+    while True:
+        show_menu()
+        choice = input("\nEnter the meal number to order (or 0 to print the total amount with details): ")
+
+        if choice == "0":
+            return
+
+        if choice not in MENU:
+            clear_screen()
+            print("Invalid input!\n")
+            continue
+
         try:
             nb_of_meals = int(input("Enter the number of meals: "))
-            if nb_of_meals > 0:
-                current_nb_of_meals.append(nb_of_meals)
-                current_order.append(menu[choice])
-            else:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print("Invalid input!\nThe number must be an integer greater than zero ^_^\n")
-                continue
         except ValueError:
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print("Invalid input!\nThe number must be an integer greater than zero ^_^\n")
-                continue
-        os.system('cls' if os.name == 'nt' else 'clear')
+            nb_of_meals = 0
+
+        if nb_of_meals <= 0:
+            clear_screen()
+            print(INVALID_NUMBER_MSG)
+            continue
+
+        current_order.append(MENU[choice])
+        current_nb_of_meals.append(nb_of_meals)
+        clear_screen()
         print("Great!\n")
-    else:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("Invalid input!\n")
+
+
+def print_receipt(current_order, current_nb_of_meals):
+    total_price = 0
+    if current_order:
+        print("\nYour meal/s:\n")
+        for index, item in enumerate(current_order, start=1):
+            nb = current_nb_of_meals[index - 1]
+            line_total = item["price"] * nb
+            print(f"{index}. {item['name']} x{nb} for ${line_total}")
+            total_price += line_total
+    print(f"\nTotal amount: ${total_price}\n")
+    print(SEPARATOR + "\n")
+
+
+def main():
+    current_order = []
+    current_nb_of_meals = []
+    take_order(current_order, current_nb_of_meals)
+    print_receipt(current_order, current_nb_of_meals)
+
+
+if __name__ == "__main__":
+    main()
